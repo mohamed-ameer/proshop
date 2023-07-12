@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
-
+/*
+The model you define in the Node.js server is an abstraction of the data in your MongoDB database, 
+which is represented as a document. 
+Because of this abstraction, you may use the “Mongoose” schemas to construct a blueprint of how you want the added data to look and behave.
+*/
 const userSchema = mongoose.Schema(
   {
     name: {

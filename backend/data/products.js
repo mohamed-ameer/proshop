@@ -1,6 +1,22 @@
+/*
+we're going to prepare our data because we want to have what we call a database seeder,
+database seeder is a script that we can run and it will seed the database.
+We'll just add some some dummy data for products & users
+and the seeder script will take these products and users and insert them into the database.
+we need some users because products are going to be tied to a user.
+*/
+/*
+since we're using MongoDB or just about any database, when you insert a record, 
+it automatically creates the ID, So we don't need these IDs in th Products, so let's just go ahead and get rid of these IDs.
+*/
+/*
+we're going to have a user connected to these products,
+but we're going to do that in in the seed file or in the seed script.
+seeder is a script that we can run and it will seed the database.
+*/
 const products = [
   {
-    _id: '1',
+    // _id: '1',
     name: 'Airpods Wireless Bluetooth Headphones',
     image: '/images/airpods.jpg',
     description:
@@ -13,7 +29,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '2',
+    // _id: '2',
     name: 'iPhone 11 Pro 256GB Memory',
     image: '/images/phone.jpg',
     description:
@@ -26,7 +42,7 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: '3',
+    // _id: '3',
     name: 'Cannon EOS 80D DSLR Camera',
     image: '/images/camera.jpg',
     description:
@@ -39,7 +55,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '4',
+    // _id: '4',
     name: 'Sony Playstation 4 Pro White Version',
     image: '/images/playstation.jpg',
     description:
@@ -52,7 +68,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
+    // _id: '5',
     name: 'Logitech G-Series Gaming Mouse',
     image: '/images/mouse.jpg',
     description:
@@ -65,7 +81,7 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '6',
+    // _id: '6',
     name: 'Amazon Echo Dot 3rd Generation',
     image: '/images/alexa.jpg',
     description:

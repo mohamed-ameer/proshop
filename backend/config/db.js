@@ -1,4 +1,4 @@
-// in this file we are gonna connect with our database
+// in this script file we are gonna connect with our database
 import mongoose from 'mongoose';
 
 const connectDB = async () => {

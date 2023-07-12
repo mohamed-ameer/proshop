@@ -2,7 +2,14 @@ import express from 'express';
 import products from './data/products.js';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
-
+/*
+the config() method takes a .env file path as an argument, 
+it parses it and sets environment vars defined in that file in process.env
+*/
+/*
+You don't need to write require('dotenv').config() in every file. 
+Just include this as the top statement in the index.js/server.js or the main file that got executed at the very first place when you run your program.
+*/
 dotenv.config();
 const port = process.env.PORT || 5000;
 connectDB();//connect to mongodb

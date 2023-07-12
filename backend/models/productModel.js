@@ -15,6 +15,11 @@ and presumably uses some more resources for tracking subdocs.
 If you have schemas that are re-used in various parts of your model, 
 then it might be useful to define individual schemas for the child docs so you don't have to duplicate yourself.
 */
+/*
+The model you define in the Node.js server is an abstraction of the data in your MongoDB database, 
+which is represented as a document. 
+Because of this abstraction, you may use the “Mongoose” schemas to construct a blueprint of how you want the added data to look and behave.
+*/
 const reviewSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
