@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 /*
 the config() method takes a .env file path as an argument, 
@@ -12,13 +13,20 @@ Just include this as the top statement in the index.js/server.js or the main fil
 */
 dotenv.config();
 const port = process.env.PORT || 5000;
-connectDB();//connect to mongodb
+//connect to mongodb
+connectDB();
+// init app
 const app = express();
-
-app.use('/api/products', productRoutes);
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
+// MIDDLEWARES (middleware functions and routes)
+app.use('/api/products', productRoutes);
+app.use(notFound);
+// ERROR HANDLER MIDDLEWARE (Last middleware to use)
+// add errorHandler middleware function to the middleware chain
+app.use(errorHandler);
+// start the server
 app.listen(port, () =>
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${port}`)
 );
