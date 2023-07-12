@@ -1,12 +1,25 @@
+import express from 'express';
+import {
+  getProducts,
+  getProductById,
+} from '../controllers/productController.js';
+const router = express.Router();
+router.route('/').get(getProducts);
+router.route('/:id').get(getProductById);
+export default router;
 /*
 If we kept all of our routes in Server.js, it would get very long and very messy.
 So Express has a router that we can use so we can put our routes in separate files.
 */
-import express from 'express';
-import asyncHandler from '../middleware/asyncHandler.js';
-import Product from '../models/productModel.js';
-
-const router = express.Router();
+/*
+Controller / Controller function is nothing but the logic/ the functionality of the Route handler.
+Using Controller make Routes more organized and cleaner.
+In simple word we are seperating the logic of the route in another file called controller.
+----------------------------------------------------------------------------------------------------
+Controller + Route = cleaner code
+----------------------------------------------------------------------------------------------------
+ex:
+without controller:-
 router.get(
   '/',
   asyncHandler(async (req, res) => {
@@ -14,18 +27,10 @@ router.get(
     res.json(products);
   })
 );
-
-router.get(
-  '/:id',
-  asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      return res.json(product);
-    }
-    // res.status(404).json({ message: 'Product not found' });
-    res.status(404);
-    throw new Error('Resource not found');
-  })
-);
-
-export default router;
+with controller:-
+const getProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({});
+  res.json(products);
+});
+router.route('/').get(getProducts);
+*/
