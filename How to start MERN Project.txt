@@ -1,0 +1,82 @@
+=====================================================================
+A)Preparing the boilerplate /the project structure /the project setup:
+=====================================================================
+1-create the workspace area of the project
+---------------------------------------------
+>>mkdir proshop
+>>cd proshop
+
+=============================================
+2-create client side 
+---------------------------------------------
+>>npx create-react-app frontend (this commant will generate the boilerplate of react app)
+
+=============================================
+3-create server side
+---------------------------------------------
+>>npm init(entry point: server.js,licence:MIT)
+*add "type": "module", in the package.json to allow using the ES6 module syntax instead of using the commonjs syntax(which is the default syntax => const x = require("axios"))
+*create a backend folder and server.js file
+>>npm i express
+>>npm i -D nodemon (this tool restart the server automaticaly after we make any change)
+>>npm i -D concurrently (this tool allow us to run the frontend and the backend at the same time at the same terminal screen using one command)
+>>npm i -D nodemon concurrently
+*at the package.json:
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+>>npm run dev  
+==============================================
+4-create environment variables
+*environment variables are the sensetive secret values that you want to keep it hidden 
+*we can access the environment variables throughout the server in a file named (.env)
+*we need to install a package called dotenv and this will allow us to basically have a file named (.env)
+ and we can define our environment variables in there.
+>>npm i -D dotenv
+*in the root, not in the back end folder or the front end, but in the root we're going to have a file called (.env)
+ And this is where we want to put any global environment variables.
+=====================================================================
+B)Start working with database (MongoDB & Mongoose)
+=====================================================================
+*mongodb atlas is a free cloud database (cloud means that u don't need to install it in your machine and you don't neet to save it in the production server)
+1-login at https://cloud.mongodb.com/v2#/org
+2-create an Organization or work on existing one 
+3-create new Project
+4-build a database (M0 free, aws ,clustor0 ,create)
+5-add username and password (create user)
+6-your Current IP Address should be added automaticaly ,if not then click=>Add My Current IP Address
+7-finish and close
+-------------------------------------------
+*To get our connecting strings
+1-Connect
+2-Connect to your application(Drivers)
+3-Add your connection string into your application code
+4-copy that connection string and add it in an environment variable in the (.env) file
+	MONGO_URI=mongodb+srv://mohamed:<password>@cluster0.iwfxcp1.mongodb.net/?retryWrites=true&w=majority
+5-Browse Collections
+6-Add My Own Data
+7-add the name of your database (ex:bl7)
+8-MONGO_URI=mongodb+srv://mohamed:<password>@cluster0.iwfxcp1.mongodb.net/bl7?retryWrites=true&w=majority
+---------------------------------------------
+*To Access your data through tools
+1-Connect
+2-Access your data through tools(compass)
+3-copy the uri link
+---------------------------------------------
+*Mongoose is a ODM used To connect our mongo database with our application 
+*To connect with mongoose
+1-npm i mongoose
+2-ceate a config file in the backend to connect to our database(config/db.js)
+
+=====================================================================
+C)Start working with Redux&Redux Toolkit (TO Manage our states)
+=====================================================================
+*state is the data that we want to track
+*compnent level state is the state that tracked by it's component only 
+*global / app level state is the state that tracked by the whole react application
+1-create/configure redux store 
+2-Provide/inject this store in the react application using react-redux(it is a bridge b/w react app and redux store)
+3-create constants.js file 
