@@ -14,8 +14,9 @@ import { BASE_URL } from '../constants';
 // fetchBaseQuery is the function that will allow us to make requests to our backend API.
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
 
+//using redux toolkit we can send request to backend api without using fetch api.
 export const apiSlice = createApi({
   baseQuery,
   tagTypes: ['Product', 'Order', 'User'],//tagTypes are used to define the types of data that will be fetching from our API.
-  endpoints: (builder) => ({}),
+  endpoints: (builder) => ({}),//we can put the endpoints directly here or we can inject the endpoints from a separate file. 
 });

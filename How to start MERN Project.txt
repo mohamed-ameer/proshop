@@ -79,4 +79,10 @@ C)Start working with Redux&Redux Toolkit (TO Manage our states)
 *global / app level state is the state that tracked by the whole react application
 1-create/configure redux store 
 2-Provide/inject this store in the react application using react-redux(it is a bridge b/w react app and redux store)
-3-create constants.js file 
+3-create constants.js file to contain the api baseurl & the api endpoints
+4-Preparing the Redux boilerplate to be suitable for working with backend API:-
+    =>store.js
+    =>constants.js
+    =>apiSlice.js
+    those 3-file are gonna be the boilerplate/template of our Redux system
+    which means we will write it once and we will never touch it again 
