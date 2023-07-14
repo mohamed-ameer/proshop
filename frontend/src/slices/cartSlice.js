@@ -21,15 +21,34 @@ const cartSlice = createSlice({
     2-action:which include any data inside of a payload.
     */
     addToCart: (state, action) => {
-      // The item to add to the cart
-      const item = action.payload;
-      // Update the cart state using the updateCart function
-      return updateCart(state, item);  
+        // The item to add to the cart
+        const item = action.payload;
+        // Check if the item is already in the cart
+        const existItem = state.cartItems.find((x) => x._id === item._id);
+
+        if (existItem) {
+        // If exists, update quantity
+        state.cartItems = state.cartItems.map((x) =>
+            x._id === existItem._id ? item : x
+        );
+        } else {
+        // If not exists, add new item to cartItems
+        state.cartItems = [...state.cartItems, item];
+        }
+        // Update the cart state using the updateCart function
+        return updateCart(state);  
+    },
+    removeFromCart: (state, action) => {
+        // Filter out the item to remove from the cart
+        state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
+  
+        // Update the prices and save to storage
+        return updateCart(state);
     },
   },
 });
 //we need to export any function we create as an action ,so we will be able to bring it and use it.
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 /*
 *each slice contain it's own state and reducers,hence we need to export the reducers of the cartSlice altogether to add them in the store. 
 *note:the apiSlice contain different slices that are dealing with asynchronous requests,so it work differently unlike the normal slice. 
