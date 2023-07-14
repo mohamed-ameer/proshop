@@ -8,7 +8,7 @@ because we already inject it in the apiSlice.
 redux toolkit make it easier for us to handle the apis request / async code 
 without using fetch api or axios 
 */
-export const productSlice = apiSlice.injectEndpoints({
+export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({//the builder object has methods like query that allow us to make a query.
     getProducts: builder.query({
       query: () => ({
@@ -33,4 +33,4 @@ ex:
 the convention is :start with [use] end with [Query]
 getProducts ==> useGetProductsQuery
 */
-export const { useGetProductsQuery, useGetProductDetailsQuery } = productSlice;
+export const { useGetProductsQuery, useGetProductDetailsQuery } = productApiSlice;

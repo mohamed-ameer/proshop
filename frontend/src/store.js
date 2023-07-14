@@ -2,11 +2,13 @@
 //this file is the boileplate,so we will never touch this file again
 import { configureStore } from '@reduxjs/toolkit';
 import { apiSlice } from './slices/apiSlice';
+import cartSliceReducer from './slices/cartSlice';
 //create our store
 const store = configureStore({
     //here we will add any reducer that we have
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
+        cart: cartSliceReducer,
     },
     middleware: (getDefaultMiddleware) =>{
         return getDefaultMiddleware().concat(apiSlice.middleware)
