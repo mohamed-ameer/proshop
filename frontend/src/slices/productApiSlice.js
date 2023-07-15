@@ -3,7 +3,7 @@ import { apiSlice } from './apiSlice';
 /*
 we are injecting the endpoints of productAPI into the main apiSlice,
 that is why we don't have to add the reducer of productApiSlice in the redux store directly
-because we already inject it in the apiSlice.
+because we already inject it in the apiSlice(in short it is a child of the apiSlice).
 ----------------------------------------------
 redux toolkit make it easier for us to handle the apis request / async code 
 without using fetch api or axios 
