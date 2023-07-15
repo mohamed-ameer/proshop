@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 /*
 the config() method takes a .env file path as an argument, 
 it parses it and sets environment vars defined in that file in process.env
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 });
 // MIDDLEWARES (middleware functions and routes)
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 app.use(notFound);
 // ERROR HANDLER MIDDLEWARE (Last middleware to use)
 // add errorHandler middleware function to the middleware chain

@@ -70,7 +70,11 @@ B)Start working with database (MongoDB & Mongoose)
 *To connect with mongoose
 1-npm i mongoose
 2-ceate a config file in the backend to connect to our database(config/db.js)
-
+---------------------------------------------
+*whenever you want to create a database collection(table),you will do 3 things:
+1-create the model that will define the (schema/structure) of that collection
+2-create the controller that will handle the logic / the crud operations 
+3-create the routes that will call specific controller function based on specific urlpattern
 =====================================================================
 C)Start working with Redux&Redux Toolkit (TO Manage our states)
 =====================================================================
