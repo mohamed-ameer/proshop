@@ -1,9 +1,10 @@
 import React from 'react'
-import { Navbar,Container,Nav, Badge } from "react-bootstrap";
+import { Navbar,Container,Nav, NavDropdown, Badge } from "react-bootstrap";
 import { FaShoppingCart,FaUser } from "react-icons/fa";
 import { LinkContainer } from 'react-router-bootstrap';
 import logo from '../assets/logo.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../slices/authSlice';
 
 const Header = () => {
   /*
@@ -12,6 +13,12 @@ const Header = () => {
   And it doesn't matter which slice it is or what part of your state it is.
   */
   const { cartItems } = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
   return (
     <header>
       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
@@ -35,11 +42,24 @@ const Header = () => {
                   )}
                 </Nav.Link>
               </LinkContainer>  
-              <LinkContainer to='/login'>
-                <Nav.Link>
+              {userInfo ? (
+                <>
+                  <NavDropdown title={userInfo.name} id='username'>
+                    <LinkContainer to='/profile'>
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              ) : (
+                <LinkContainer to='/login'>
+                  <Nav.Link>
                     <FaUser /> Sign In
-                </Nav.Link>
-              </LinkContainer>  
+                  </Nav.Link>
+                </LinkContainer>
+              )} 
             </Nav>
           </Navbar.Collapse>
         </Container>

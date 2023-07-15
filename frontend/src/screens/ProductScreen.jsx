@@ -11,7 +11,7 @@ import { addToCart } from '../slices/cartSlice';
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
-  const {data: product,isLoading,error,} = useGetProductDetailsQuery(productId);
+  const {data: product,isLoading,error,} = useGetProductDetailsQuery(productId);//visit: https://redux-toolkit.js.org/rtk-query/usage/queries
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
