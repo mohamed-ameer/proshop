@@ -1,5 +1,6 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import User from '../models/userModel.js';
+import jwt from 'jsonwebtoken';
 
 // @desc    Auth user & get token
 // @route   POST /api/users/auth
@@ -8,8 +9,17 @@ const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-
+    //check if the email is exist or not AND check if the password is match or not
     if (user && (await user.matchPassword(password))) {
+        //generate a token
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {expiresIn: '1h',});        
+        // Set JWT as an HTTP-Only cookie
+        res.cookie('jwt', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development', // Use secure cookies in production
+        sameSite: 'strict', // Prevent CSRF attacks
+        maxAge: 60 * 60 * 1000, // 1 hour in milliseconds
+        });
         res.json({
         _id: user._id,
         name: user.name,
@@ -17,8 +27,8 @@ const authUser = asyncHandler(async (req, res) => {
         isAdmin: user.isAdmin,
         });
     } else {
-        res.status(401);
-        throw new Error('Invalid email or password');
+        res.status(401);//401 is the Unauthorized error
+        throw new Error('Invalid email or password');//we can let the enduser know which one is wrong/invalid the email or the password but for security reason we have to make it ambiguity(don't tell the enduser which input is invalid). 
     }
 });
 

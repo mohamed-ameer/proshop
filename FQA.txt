@@ -1,0 +1,20 @@
+(Q)What is JWT?
+==================
+*First of all,in web development, there're many different ways to authenticate users.
+You can use cookies, sessions, Json web tokens or a combination, and there's other services like OAuth(Google,Facebook,...).
+A Json web token is a secure way to share information between two parties, such as a web server and a client.
+JWT consists of three parts a header, a payload and a signature.
+=> the payload contains user's information like the user's ID or the user's role.
+=> the signature is used to verify that the information hasn't been tampered with in any way.
+So JWT s are commonly used for authentication, which is the process of verifying a user's identity.
+-------------------------------------
+*usually, Json web tokens often get stored in the browser on the client,
+hence,we would send a token and then we'd store that token in our local storage on the client and then send
+that token to any protected routes where we had to be logged in, where we had to authenticate.
+BUT that's not the best way to do this, it can be insecure because you are storing it on the client, so you open yourself up to cross-site scripting attacks.
+-------------------------------------
+*what we're going to do is we're going to generate a Json web token,
+then we're going to store it in an Http only cookie on the server.
+So we're going to write some middleware that will basically, once we authenticate or we register,
+it'll create the token, store it in an Http only cookie, and then that will get sent with every request from then on.
+in short it's not going to be stored in our browser in local storage, which makes it much safer.
