@@ -23,16 +23,16 @@ const app = express();
 //these two lines of middlewares allow us to parse/get/read tha data inside the request Body(the Body data)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+//Cookie parser middleware
+//this middleware allow us to parse the cookie from the request object
 app.use(cookieParser());
 // MIDDLEWARES (middleware functions and routes)
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
+app.get('/', (req, res) => {res.send('API is running...');});
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
-app.use(notFound);
 // ERROR HANDLER MIDDLEWARE (Last middleware to use)
 // add errorHandler middleware function to the middleware chain
+app.use(notFound);
 app.use(errorHandler);
 // start the server
 app.listen(port, () =>

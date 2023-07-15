@@ -39,6 +39,18 @@ const registerUser = asyncHandler(async (req, res) => {
   res.send('register user');
 });
 
+// @desc    Logout user / clear cookie
+// @route   POST /api/users/logout
+// @access  Public
+const logoutUser = (req, res) => {
+  //to clear the cookie we just need to set the value to empty string/''/nothing, then make it expire
+  res.cookie('jwt', '', {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+  res.status(200).json({ message: 'Logged out successfully' });
+};
+
 // @desc    Get user profile
 // @route   GET /api/users/profile
 // @access  Private
@@ -84,6 +96,7 @@ const updateUser = asyncHandler(async (req, res) => {
 export {
   authUser,
   registerUser,
+  logoutUser,
   getUserProfile,
   updateUserProfile,
   getUsers,
