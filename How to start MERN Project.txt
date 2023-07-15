@@ -90,3 +90,11 @@ C)Start working with Redux&Redux Toolkit (TO Manage our states)
     =>apiSlice.js
     those 3-file are gonna be the boilerplate/template of our Redux system
     which means we will write it once and we will never touch it again 
+=====================================================================
+D)Start Testing your API and build an organized documentation for it using Postman
+=====================================================================
+1-create workspace with the name of your project(proshop)
+2-create environment to add the fixed values like the baseURL (proshop environment)
+3-create APIs (ProShop API)
+4-create collection for each table/endpoint (Products,Users,)
+5-inside each collection create any api request that is gonna deal with that collection (Get All Products,Get Product By Id,....) 

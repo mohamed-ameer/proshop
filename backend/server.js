@@ -18,10 +18,15 @@ const port = process.env.PORT || 5000;
 connectDB();
 // init app
 const app = express();
+//Body parser middleware 
+//these two lines of middlewares allow us to parse/get/read tha data inside the request Body(the Body data)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// MIDDLEWARES (middleware functions and routes)
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
-// MIDDLEWARES (middleware functions and routes)
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use(notFound);

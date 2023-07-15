@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 /*
 The model you define in the Node.js server is an abstraction of the data in your MongoDB database, 
 which is represented as a document. 
@@ -29,7 +30,9 @@ const userSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 const User = mongoose.model('User', userSchema);
 
 export default User;
