@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 /*
 the config() method takes a .env file path as an argument, 
 it parses it and sets environment vars defined in that file in process.env
@@ -30,6 +31,7 @@ app.use(cookieParser());
 app.get('/', (req, res) => {res.send('API is running...');});
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 // ERROR HANDLER MIDDLEWARE (Last middleware to use)
 // add errorHandler middleware function to the middleware chain
 app.use(notFound);
