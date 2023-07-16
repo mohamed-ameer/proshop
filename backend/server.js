@@ -32,6 +32,15 @@ app.get('/', (req, res) => {res.send('API is running...');});
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+/*
+We will add PayPal Route so PayPal can get the clientID via it,
+and the reason for this is because we can't put our client ID in the front end.
+you don't want it on the client side because you don't want people getting that.
+so we're storing it in our Env file and then we're creating a route so PayPal can then get that clientID and then use it.
+*/
+app.get('/api/config/paypal', (req, res) =>
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
+);
 // ERROR HANDLER MIDDLEWARE (Last middleware to use)
 // add errorHandler middleware function to the middleware chain
 app.use(notFound);

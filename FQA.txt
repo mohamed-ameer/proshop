@@ -18,3 +18,14 @@ then we're going to store it in an Http only cookie on the server.
 So we're going to write some middleware that will basically, once we authenticate or we register,
 it'll create the token, store it in an Http only cookie, and then that will get sent with every request from then on.
 in short it's not going to be stored in our browser in local storage, which makes it much safer.
+================================================================================================================
+(Q)Using Paypal API for online Paying Test
+================================================================================================================
+1-login at:https://developer.paypal.com/dashboard
+2-goto Testing Tools > SandBox Account
+    -Business account (get the money/the seller)
+    -Personal account (pay the money/the buyer) this account is what you use to pay with 
+3-goto Apps&Cradentials  
+    -create App -->name:proshop,Merchant
+    -you will get clientID
+    -in .env file: PAYPAL_CLIENT_ID=YOUR_PAYPAL_CLIENT_ID
