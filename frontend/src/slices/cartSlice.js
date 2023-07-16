@@ -49,10 +49,14 @@ const cartSlice = createSlice({
       state.shippingAddress = action.payload;
       localStorage.setItem('cart', JSON.stringify(state));
     },
+    savePaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload;
+      localStorage.setItem('cart', JSON.stringify(state));
+    },
   },
 });
 //we need to export any function we create as an action ,so we will be able to bring it and use it.
-export const { addToCart, removeFromCart, saveShippingAddress } = cartSlice.actions;
+export const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod } = cartSlice.actions;
 /*
 *each slice contain it's own state and reducers,hence we need to export the reducers of the cartSlice altogether to add them in the store. 
 *note:the apiSlice contain different slices that are dealing with asynchronous requests,so it work differently unlike the normal slice. 
