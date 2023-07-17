@@ -100,7 +100,9 @@ const getMyOrders = asyncHandler(async (req, res) => {
 // @route   GET /api/orders
 // @access  Private/Admin
 const getOrders = asyncHandler(async (req, res) => {
-  res.send('get all orders');
+  // we will get all orders,and on the return value inside each order document we will populate/add name field and id field from the user collection that related to that order(we will populate the user's id and user's name with the order)
+  const orders = await Order.find({}).populate('user', 'id name');
+  res.json(orders);
 });
 
 export {
