@@ -44,18 +44,25 @@ const OrderScreen = () => {
       try {
         await payOrder({ orderId, details });
         refetch();
+        /* 
+        const {data: order,refetch,isLoading,error,} = useGetOrderDetailsQuery(orderId);
+        we will use refetch() function that related to useGetOrderDetailsQuery to refetch order from the API.
+        The purpose of refetch() in React is to re-fetch data from a remote server or data source and update the state of a React component with the new data. 
+        This is often necessary when the data displayed in the component needs to be updated in response to changes in the application state or user actions.
+        By implementing refetch() in your React components, you can ensure that the data displayed in your application is always up-to-date and reflects any changes that may have occurred since the data was last fetched.    
+        */
         toast.success('Order is paid');
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
     });
   }
-
-  async function onApproveTest() {
-    await payOrder({ orderId, details: { payer: {} } });
-    refetch();
-    toast.success('Order is paid');
-  }
+  // TESTING ONLY! REMOVE BEFORE PRODUCTION
+  // async function onApproveTest() {
+  //   await payOrder({ orderId, details: { payer: {} } });
+  //   refetch();
+  //   toast.success('Order is paid');
+  // }
 
   function onError(err) {
     toast.error(err.message);
@@ -78,6 +85,13 @@ const OrderScreen = () => {
   const deliverHandler = async () => {
     await deliverOrder(orderId);
     refetch();
+    /* 
+    const {data: order,refetch,isLoading,error,} = useGetOrderDetailsQuery(orderId);
+    we will use refetch() function that related to useGetOrderDetailsQuery to refetch order from the API.
+    The purpose of refetch() in React is to re-fetch data from a remote server or data source and update the state of a React component with the new data. 
+    This is often necessary when the data displayed in the component needs to be updated in response to changes in the application state or user actions.
+    By implementing refetch() in your React components, you can ensure that the data displayed in your application is always up-to-date and reflects any changes that may have occurred since the data was last fetched.    
+    */
   };
 
   return isLoading ? (
