@@ -17,15 +17,33 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({
-  storage,
-});
+function fileFilter(req, file, cb) {
+    const filetypes = /jpe?g|png|webp/;
+    const mimetypes = /image\/jpe?g|image\/png|image\/webp/;
+  
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = mimetypes.test(file.mimetype);
+  
+    if (extname && mimetype) {
+      cb(null, true);
+    } else {
+      cb(new Error('Images only!'), false);
+    }
+}
+const upload = multer({ storage, fileFilter });
+const uploadSingleImage = upload.single('image');
 //[upload.single('image')] we're using single because we only want to allow a single file.You can upload multiple files as an array.It's a little more advanced, but you can do that.
-router.post('/', upload.single('image'), (req, res) => {
-  res.send({
-    message: 'Image uploaded successfully',
-    image: `/${req.file.path}`,
-  });
+router.post('/', (req, res) => {
+    uploadSingleImage(req, res, function (err) {
+      if (err) {
+        res.status(400).send({ message: err.message });
+      }
+  
+      res.status(200).send({
+        message: 'Image uploaded successfully',
+        image: `/${req.file.path}`,
+      });
+    });
 });
 
 export default router;
