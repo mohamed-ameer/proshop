@@ -14,6 +14,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: PRODUCTS_URL,//using redux toolkit we can send request to backend api and fetch our data without using fetch api or axios.
       }),
+      providesTags: ['Product'],//we have to add this property otherwise we need to refresh the page to get the new update
       keepUnusedDataFor: 5,
     }),
     getProductDetails: builder.query({
@@ -27,7 +28,15 @@ export const productApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCTS_URL}`,
         method: 'POST',
       }),
-      invalidatesTags: ['Product'],
+      invalidatesTags: ['Product'],//the invalidatesTags property for the mutation endpoint is used to remove them from caches.
+    }),
+    updateProduct: builder.mutation({
+      query: (data) => ({
+        url: `${PRODUCTS_URL}/${data.productId}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Product'],//we use it to clear the cache.
     }),
   }),
 });
@@ -44,4 +53,5 @@ export const {
   useGetProductsQuery,
   useGetProductDetailsQuery,
   useCreateProductMutation,
+  useUpdateProductMutation,
 } = productApiSlice;
