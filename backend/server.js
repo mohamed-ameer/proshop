@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
@@ -6,6 +7,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 /*
 the config() method takes a .env file path as an argument, 
 it parses it and sets environment vars defined in that file in process.env
@@ -28,10 +30,10 @@ app.use(express.urlencoded({ extended: true }));
 //this middleware allow us to parse the cookie from the request object
 app.use(cookieParser());
 // MIDDLEWARES (middleware functions and routes)
-app.get('/', (req, res) => {res.send('API is running...');});
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/upload', uploadRoutes);
 /*
 We will add PayPal Route so PayPal can get the clientID via it,
 and the reason for this is because we can't put our client ID in the front end.
@@ -41,6 +43,21 @@ so we're storing it in our Env file and then we're creating a route so PayPal ca
 app.get('/api/config/paypal', (req, res) =>
   res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
 );
+// Upload static files
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running....');
+  });
+}
 // ERROR HANDLER MIDDLEWARE (Last middleware to use)
 // add errorHandler middleware function to the middleware chain
 app.use(notFound);

@@ -97,4 +97,11 @@ D)Start Testing your API and build an organized documentation for it using Postm
 2-create environment to add the fixed values like the baseURL (proshop environment)
 3-create APIs (ProShop API)
 4-create collection for each table/endpoint (Products,Users,)
-5-inside each collection create any api request that is gonna deal with that collection (Get All Products,Get Product By Id,....) 
+5-inside each collection create any api request that is gonna deal with that collection (Get All Products,Get Product By Id,....)
+=====================================================================
+E)How to upload files in nodeJS?
+===================================================================== 
+1-install multer middleware(Multer is a node.js middleware for handling multipart/form-data , which is primarily used for uploading files)
+>>npm i multer
+2-create uploadRoutes.js to setup the endpoint
+3-create uploads(the name of the folder that we will store the files in) folder in the root directory next to the backend and frontend folder
