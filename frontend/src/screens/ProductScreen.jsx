@@ -40,6 +40,8 @@ const ProductScreen = () => {
       }).unwrap();
       refetch();
       toast.success('Review created successfully');
+      setRating(0);
+      setComment('');
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
