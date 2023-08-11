@@ -1,11 +1,14 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap';
-import Product from '../components/Product';
 import { useGetProductsQuery } from '../slices/productApiSlice';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { useParams } from 'react-router-dom';
+import Product from '../components/Product';
 import Paginate from '../components/Paginate';
+import ProductCarousel from '../components/ProductCarousel';
+
 const HomeScreen = () => {
   const { pageNumber , keyword } = useParams();
   const { data, isLoading, error } = useGetProductsQuery({
@@ -15,6 +18,13 @@ const HomeScreen = () => {
 
   return (
     <>
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to='/' className='btn btn-light'>
+          Go Back
+        </Link>
+      )}
       {/* 
         the isLoading logic structure:->{isLoading ? () : error ? () : ()} 
       */}
