@@ -3,11 +3,11 @@
 > This repository is the client side and the server side of eCommerce Project built with MERN stack techs.
 
 <img src="screens.png">
-```
+
 **see live :->** https://proshop-4115.onrender.com/
 # Usage
 - Install Mongo DB on your local machine or use Mongo DB Cloud -> [Go To MongoDB Website](https://www.mongodb.com)
-```
+
 ## Environment Variables
 Create `.env` file in the root folder and add the following
 ```
