@@ -11,9 +11,9 @@ without using fetch api or axios
 export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({//the builder object has methods like query that allow us to make a query.
     getProducts: builder.query({
-      query: ({ pageNumber }) => ({
+      query: ({ keyword,pageNumber }) => ({
         url: PRODUCTS_URL,//using redux toolkit we can send request to backend api and fetch our data without using fetch api or axios.
-        params: { pageNumber },
+        params: { keyword,pageNumber },
       }),
       keepUnusedDataFor: 5,
     }),

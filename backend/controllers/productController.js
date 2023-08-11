@@ -9,10 +9,19 @@ const getProducts = asyncHandler(async (req, res) => {
   // const products = await Product.find({});
   // res.json(products);
   //with pagination
-  const pageSize = 12;
+  const pageSize = process.env.PAGINATION_LIMIT;
   const page = Number(req.query.pageNumber) || 1;
-  const count = await Product.countDocuments();
-  const products = await Product.find()
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,//we use regular expression because we want the keyword to match nearly not match the same exact word  for ex)let's say you search for iPhone10, but we just send in a keyword of "phone".We want that to match.
+          $options: 'i',//case insensitive
+        },
+      }
+    : {};
+
+  const count = await Product.countDocuments({ ...keyword });
+  const products = await Product.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
